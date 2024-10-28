@@ -228,8 +228,8 @@
     </div>
 <?php endforeach; ?>
 
+<!-- Modal hapus menu -->
 <?php foreach ($data_sub_menu_tidak_aktif as $menu): ?>
-    <!-- Modal hapus menu -->
     <div class="modal fade" id="delete-sub-menu-modal<?= $menu['id']; ?>" tabindex="-1"
         aria-labelledby="delete-sub-menu-modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -257,8 +257,8 @@
     </div>
 <?php endforeach; ?>
 
+<!-- Modal off menu -->
 <?php foreach ($data_sub_menu_aktif as $menu): ?>
-    <!-- Modal off menu -->
     <div class="modal fade" id="off-sub-menu-modal<?= $menu['id']; ?>" tabindex="-1"
         aria-labelledby="off-sub-menu-modal-label" aria-hidden="true">
         <div class="modal-dialog">

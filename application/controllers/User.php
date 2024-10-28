@@ -27,7 +27,9 @@ class User extends CI_Controller
     public function profil()
     {
         $username = $this->session->userdata('username');
+        $id_guru = $this->session->userdata('id');
         $id = $this->session->userdata('id_level');
+
         $data['menu'] = $this->User_model->user_menu($id)->result_array();
         $data['judul'] = 'Profil';
         $data['user'] = $this->User_model->get_user_login($username)->row_array();
@@ -37,6 +39,7 @@ class User extends CI_Controller
     }
     public function edit_profil()
     {
+        $id_guru = $this->session->userdata('id');
         $username = $this->session->userdata('username');
         $id = $this->session->userdata('id_level');
         $data['menu'] = $this->User_model->user_menu($id)->result_array();
@@ -62,40 +65,44 @@ class User extends CI_Controller
 
     public function update_profil()
     {
-        $nama = htmlspecialchars($this->input->post('nama'));
-        $email = htmlspecialchars($this->input->post('email'));
-        $username = htmlspecialchars($this->input->post('username'));
-        $user_foto = $this->input->post('user_foto');
-        $upload_foto = $_FILES['foto']['name'];
-        if ($upload_foto) {
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = '2048';
-            $config['upload_path'] = './assets/images/';
+        $id_guru = $this->input->post('id');
+        $kd_guru = $this->input->post('kode_guru');
+        $tanggal = date('Y-m-d');
+        $new_file_name = $this->input->post('old_foto'); // Jika tidak ada file baru
 
-            $this->load->library('upload', $config);
+        if (!empty($_FILES['foto']['name'])) {
+            $config['upload_path'] = './assets/images/profil/';
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $config['max_size'] = 0;
+            $this->upload->initialize($config);
 
             if ($this->upload->do_upload('foto')) {
-                $old_foto = $user_foto;
-                if ($old_foto != "default.png" || $old_foto != "admin.png") {
-                    unlink(FCPATH . 'assets/images/' . $old_foto);
-                }
+                $uploaded_file_name = $this->upload->data('file_name');
+                $file_extension = pathinfo($uploaded_file_name, PATHINFO_EXTENSION);
+                $new_file_name = $kd_guru . "_" . date('Y-m-d', strtotime($tanggal)) . '_' . uniqid() . '.' . $file_extension;
 
-                $foto = $this->upload->data('file_name');
-            } else {
-                echo $this->upload->display_error();
+                // Compress image
+                $manager = new ImageManager(['driver' => 'gd']);
+                $img = $manager->make('./assets/images/profil/' . $uploaded_file_name);
+                $compression_quality = 75;
+                do {
+                    $img->save('./assets/images/profil/' . $new_file_name, $compression_quality);
+                    $file_size = filesize('./assets/images/profil/' . $new_file_name);
+                    $compression_quality -= 5;
+                } while ($file_size > 1000 * 1024 && $compression_quality > 0);
+
+                unlink('./assets/images/profil/' . $uploaded_file_name);
             }
-
-        } else {
-            $foto = $user_foto;
         }
 
         $data = [
-            'nama' => $nama,
-            'email' => $email,
-            'username' => $username,
-            'foto' => $foto
+            'nama' => htmlspecialchars($this->input->post('nama')),
+            'email' => htmlspecialchars($this->input->post('email')),
+            'no_hp' => htmlspecialchars($this->input->post('no_hp')),
+            'foto' => $new_file_name
         ];
-        $this->User_model->edit_profil($data, $email);
+
+        $this->User_model->edit_profil($data, $id_guru);
 
         $this->session->set_flashdata('message_level', '<div class="alert alert-success" role="alert">
         Data berhasil diubah
@@ -360,7 +367,7 @@ class User extends CI_Controller
                     $img->save('./assets/images/bukti_kegiatan/' . $new_file_name, $compression_quality);
                     $file_size = filesize('./assets/images/bukti_kegiatan/' . $new_file_name);
                     $compression_quality -= 5; // Turunkan kualitas jika ukuran masih lebih dari 500 KB
-                } while ($file_size > 500 * 1024 && $compression_quality > 0); // Terus kompres hingga ukuran lebih kecil dari 500 KB atau kualitas mencapai 0
+                } while ($file_size > 1000 * 1024 && $compression_quality > 0); // Terus kompres hingga ukuran lebih kecil dari 500 KB atau kualitas mencapai 0
 
                 // Hapus file asli
                 unlink('./assets/images/bukti_kegiatan/' . $uploaded_file_name);
@@ -489,7 +496,7 @@ class User extends CI_Controller
                     $img->save($config['upload_path'] . $new_file_name, $compression_quality);
                     $file_size = filesize($config['upload_path'] . $new_file_name);
                     $compression_quality -= 5; // Turunkan kualitas jika ukuran masih lebih dari 500 KB
-                } while ($file_size > 500 * 1024 && $compression_quality > 0); // Terus kompres hingga ukuran lebih kecil dari 500 KB atau kualitas mencapai 0
+                } while ($file_size > 1000 * 1024 && $compression_quality > 0); // Terus kompres hingga ukuran lebih kecil dari 500 KB atau kualitas mencapai 0
 
                 // Hapus file asli yang diunggah
                 unlink($config['upload_path'] . $uploaded_file_name);

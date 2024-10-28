@@ -282,34 +282,79 @@
                         <!-- Kegiatan Dinamis -->
                         <div id="kegiatan-dinamis-edit<?= $kinerja['id']; ?>">
                             <label for="select-kegiatan-edit<?= $kinerja['id']; ?>" class="form-label">Kegiatan</label>
+
+
                             <?php
                             // Pecah uraian menjadi array berdasarkan koma
                             $kegiatan_array = explode(',', $kinerja['uraian']);
                             ?>
                             <?php foreach ($kegiatan_array as $key => $selected_kegiatan): ?>
-                                <div class="input-group mb-3 kegiatan-input-edit">
-                                    <select class="form-select kegiatan-select" name="kegiatan[]"
-                                        onchange="handleKegiatanSelectChange(this)">
-                                        <option value="">Pilih Kegiatan</option>
-                                        <?php foreach ($datakegiatan as $kegiatan): ?>
-                                            <option value="<?= $kegiatan['nama_kegiatan']; ?>"
-                                                <?= trim($selected_kegiatan) == $kegiatan['nama_kegiatan'] ? 'selected' : ''; ?>>
-                                                <?= $kegiatan['nama_kegiatan']; ?>
+                                <?php
+                                $query_cek_kegiatan = $this->db->get_where('kinerja_kegiatan', ['nama_kegiatan' => $selected_kegiatan]);
+                                if ($query_cek_kegiatan->num_rows() < 1):
+                                    ?>
+
+                                    <div class="input-group mb-3 kegiatan-input-edit">
+                                        <select class="form-select kegiatan-select" name="kegiatan[]"
+                                            onchange="handleKegiatanSelectChange(this)">
+                                            <option value="<?= $selected_kegiatan; ?>">
+                                                <?= $selected_kegiatan; ?>
                                             </option>
-                                        <?php endforeach; ?>
-                                        <option value="lainnya" <?= trim($selected_kegiatan) === 'lainnya' ? 'selected' : ''; ?>>
-                                            Lainnya...
-                                        </option>
-                                    </select>
-                                    <input type="text" class="form-control" placeholder="Masukkan kegiatan lainnya"
-                                        name="kegiatan_lainnya[]"
-                                        value="<?= trim($selected_kegiatan) === 'lainnya' ? '' : ''; ?>"
-                                        style="<?= trim($selected_kegiatan) === 'lainnya' ? '' : 'display:none'; ?>">
-                                    <button type="button" class="btn btn-outline-secondary add-kegiatan-edit"
-                                        data-id="<?= $kinerja['id']; ?>">+</button>
-                                    <button type="button" class="btn btn-outline-danger remove-kegiatan-edit"
-                                        style="display: <?= $key > 0 ? 'inline' : 'none'; ?>">-</button>
-                                </div>
+                                            <?php foreach ($datakegiatan as $kegiatan): ?>
+
+
+
+
+
+                                                <option value="<?= $kegiatan['nama_kegiatan']; ?>">
+                                                    <?= $kegiatan['nama_kegiatan']; ?>
+                                                </option>
+
+                                            <?php endforeach; ?>
+                                            <option value="lainnya" <?= trim($selected_kegiatan) === 'lainnya' ? 'selected' : ''; ?>>
+                                                Lainnya...
+                                            </option>
+                                        </select>
+
+                                        <input type="text" class="form-control" placeholder="Masukkan kegiatan lainnya"
+                                            name="kegiatan_lainnya[]"
+                                            value="<?= trim($selected_kegiatan) === 'lainnya' ? '' : ''; ?>"
+                                            style="<?= trim($selected_kegiatan) === 'lainnya' ? '' : 'display:none'; ?>">
+                                        <button type="button" class="btn btn-outline-secondary add-kegiatan-edit"
+                                            data-id="<?= $kinerja['id']; ?>">+</button>
+
+                                    </div>
+                                <?php else: ?>
+                                    <div class="input-group mb-3 kegiatan-input-edit">
+                                        <select class="form-select kegiatan-select" name="kegiatan[]"
+                                            onchange="handleKegiatanSelectChange(this)">
+                                            <?php foreach ($datakegiatan as $kegiatan): ?>
+
+
+
+
+
+                                                <option value="<?= $kegiatan['nama_kegiatan']; ?>"
+                                                    <?= trim($selected_kegiatan) == $kegiatan['nama_kegiatan'] ? 'selected' : ''; ?>>
+                                                    <?= $kegiatan['nama_kegiatan']; ?>
+                                                </option>
+
+                                            <?php endforeach; ?>
+                                            <option value="lainnya" <?= trim($selected_kegiatan) === 'lainnya' ? 'selected' : ''; ?>>
+                                                Lainnya...
+                                            </option>
+                                        </select>
+
+                                        <input type="text" class="form-control" placeholder="Masukkan kegiatan lainnya"
+                                            name="kegiatan_lainnya[]"
+                                            value="<?= trim($selected_kegiatan) === 'lainnya' ? '' : ''; ?>"
+                                            style="<?= trim($selected_kegiatan) === 'lainnya' ? '' : 'display:none'; ?>">
+                                        <button type="button" class="btn btn-outline-secondary add-kegiatan-edit"
+                                            data-id="<?= $kinerja['id']; ?>">+</button>
+                                        <button type="button" class="btn btn-outline-danger remove-kegiatan-edit"
+                                            style="display: <?= $key > 0 ? 'inline' : 'none'; ?>">-</button>
+                                    </div>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
 
@@ -469,7 +514,7 @@
             <select class="form-select kegiatan-select" name="kegiatan[]"  onchange="handleKegiatanSelectChange(this)">
                 <option selected>Pilih Kegiatan</option>
                 <?php foreach ($datakegiatan as $kegiatan): ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <option value="<?= $kegiatan['nama_kegiatan']; ?>"><?= $kegiatan['nama_kegiatan']; ?></option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option value="<?= $kegiatan['nama_kegiatan']; ?>"><?= $kegiatan['nama_kegiatan']; ?></option>
                 <?php endforeach; ?>
                 <option value="lainnya">Lainnya...</option>
             </select>
@@ -497,7 +542,7 @@
                 <select class="form-select kegiatan-select" name="kegiatan[]" required onchange="handleKegiatanSelectChange(this)">
                     <option value="">Pilih Kegiatan</option>
                     <?php foreach ($datakegiatan as $kegiatan): ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <option value="<?= $kegiatan['nama_kegiatan']; ?>"><?= $kegiatan['nama_kegiatan']; ?></option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <option value="<?= $kegiatan['nama_kegiatan']; ?>"><?= $kegiatan['nama_kegiatan']; ?></option>
                     <?php endforeach; ?>
                     <option value="lainnya">Lainnya...</option>
                 </select>

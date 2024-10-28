@@ -127,7 +127,8 @@
 
                 <?php $foto = $user['foto'];
                 ?>
-                <img src="<?= base_url('assets/images/' . $foto) ?>" alt="user" class="rounded-circle" width="31" />
+                <img src="<?= base_url('assets/images/profil/' . $foto) ?>" alt="user" class="rounded-circle"
+                  width="31" />
 
               </a>
               <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">

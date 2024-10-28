@@ -6,12 +6,21 @@ function cek_login()
         redirect('login');
     } else {
         $level = $ci->session->userdata('id_level');
-        $menu = $ci->uri->segment(1);
+
+
+        $query_level = $ci->db->get_where('user_level', ['id' => $level])->row_array();
+        $menu = $query_level['level'];
 
         $query_menu = $ci->db->get_where('user_menu', ['nama_menu' => $menu])->row_array();
         $menu_id = $query_menu['id'];
-
+        $test = $ci->db->get_where('user_access_menu', ['id_level' => $level, 'id_menu' => $menu_id])->row_array();
+        // echo $menu;
+        // echo $menu_id;
+        // echo $level;
+        // var_dump($test);
+        // die;
         $user_access = $ci->db->get_where('user_access_menu', ['id_level' => $level, 'id_menu' => $menu_id]);
+
 
         if ($user_access->num_rows() < 1) {
             redirect('Login/blocked');

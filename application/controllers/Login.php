@@ -50,6 +50,7 @@ class Login extends CI_Controller
             if ($user['status_aktif'] == 1) {
                 if ($password == $user['password']) {
                     $data = [
+                        'id' => $user['id'],
                         'username' => $user['username'],
                         'kode_guru' => $user['kode_guru'],
                         'nama' => $user['nama'],

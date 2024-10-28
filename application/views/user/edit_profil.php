@@ -12,11 +12,12 @@
 
             </div>
             <?= form_open_multipart('user/edit_profil'); ?>
+
             <div class="mb-3 row">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <label for="kode_guru" class="col-sm-2 col-form-label">Kode Guru</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="email" name="email" value="<?= $user['email']; ?>"
-                        readonly>
+                    <input type="text" class="form-control" id="kode_guru" name="kode_guru"
+                        value="<?= $user['kode_guru']; ?>" readonly>
                 </div>
             </div>
             <div class="mb-3 row">
@@ -36,12 +37,25 @@
                 </div>
             </div>
             <div class="mb-3 row">
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="email" name="email" value="<?= $user['email']; ?>">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="no_hp" class="col-sm-2 col-form-label">Nomor HP</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="no_hp" name="no_hp" value="<?= $user['no_hp']; ?>">
+                </div>
+            </div>
+            <div class="mb-3 row">
                 <label for="nama" class="col-sm-2 col-form-label">Foto</label>
                 <div class="col-sm-10 d-flex align-items-center">
                     <div class="col-sm-5">
-                        <input type="hidden" name="user_foto" value="<?= $user['foto']; ?>">
+                        <input type="hidden" name="old_foto" value="<?= $user['foto']; ?>">
+                        <input type="hidden" name="id" value="<?= $user['id']; ?>">
 
-                        <img src="<?= base_url('assets/images/') . $user['foto']; ?>" alt="notFound"
+                        <img src="<?= base_url('assets/images/profil/') . $user['foto']; ?>" alt="notFound"
                             class="img-thumbnail">
 
                     </div>
