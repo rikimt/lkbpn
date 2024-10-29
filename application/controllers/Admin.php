@@ -463,7 +463,7 @@ class Admin extends CI_Controller
     public function level()
     {
         $username = $this->session->userdata('username');
-        $data['judul'] = 'Manage Level';
+        $data['judul'] = 'Jabatan';
         $id = $this->session->userdata('id_level');
         $data['menu'] = $this->User_model->user_menu($id)->result_array();
         $data['user'] = $this->User_model->get_user_login($username)->row_array();
@@ -649,4 +649,84 @@ class Admin extends CI_Controller
     }
 
     // End Kegiatan
+
+
+     // Tugas Tamabahan
+
+     public function tugas_tambahan()
+     {
+         $username = $this->session->userdata('username');
+         $data['judul'] = 'Tugas Tambahan';
+         $id = $this->session->userdata('id_level');
+         $data['menu'] = $this->User_model->user_menu($id)->result_array();
+         $data['user'] = $this->User_model->get_user_login($username)->row_array();
+         $data['datatugas'] = $this->User_model->get_all_tugas_tambahan();
+ 
+ 
+         $this->form_validation->set_rules('nama_tugas_tambahan', 'Nama Kegiatan', 'trim|required', [
+             'required' => 'Harap isi nama tugas tambahan'
+         ]);
+ 
+         if ($this->form_validation->run() == false) {
+             $this->load->view('template/header', $data);
+             $this->load->view('admin/tugas_tambahan', $data);
+             $this->load->view('template/footer');
+         } else {
+             if (isset($_POST['submit_tugas_tambahan'])) {
+                 $this->tambah_tugas_tambahan();
+             }
+ 
+             if (isset($_POST['edit_tugas_tambahan'])) {
+                 $this->edit_tugas_tambahan();
+             }
+             if (isset($_POST['delete_tugas_tambahan'])) {
+                 $this->delete_tugas_tambahan();
+             }
+         }
+     }
+ 
+     public function tambah_tugas_tambahan()
+     {
+ 
+ 
+         $nama_tugas = htmlspecialchars($this->input->post('nama_tugas_tambahan'));
+ 
+         $data = [
+             'nama_tugas' => $nama_tugas
+         ];
+         $this->User_model->tambah_tugas($data);
+         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+         Data tugas tambahan ditambahkan
+       </div>');
+         redirect('admin/tugas_tambahan');
+     }
+     public function edit_tugas_tambahan()
+     {
+ 
+ 
+         $nama_tugas = htmlspecialchars($this->input->post('nama_tugas_tambahan'));
+         $id = htmlspecialchars($this->input->post('id'));
+         $data = [
+             'nama_tugas' => $nama_tugas
+         ];
+         $this->User_model->edit_tugas($data, $id);
+         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+         Data tugas tambahan telah diubah
+       </div>');
+         redirect('admin/tugas_tambahan');
+     }
+     public function delete_tugas_tambahan()
+     {
+         $nama_tugas = htmlspecialchars($this->input->post('nama_tugas_tambahan'));
+ 
+         $id = htmlspecialchars($this->input->post('id'));
+ 
+         $this->User_model->delete_tugas($id);
+         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data ' .
+             $nama_tugas .
+             ' telah dihapus</div>');
+         redirect('admin/tugas_tambahan');
+     }
+ 
+     // End Tugas tambahan
 }

@@ -104,8 +104,7 @@
                 </div>
               </div>
               <div class="row border-top border-secondary">
-                <a class="link-success" href="<?= base_url('login/daftar'); ?>">Belum Punya Akun?</a>
-                <a class="link-success" href="<?= base_url('login/daftar'); ?>">Lupa Password</a>
+                <!-- <a class="link-success" href="">Belum Punya Akun?</a>  -->
               </div>
             </form>
           </div>

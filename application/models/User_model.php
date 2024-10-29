@@ -98,6 +98,10 @@ class User_model extends CI_Model
     {
         $this->db->insert('kinerja_kegiatan', $data);
     }
+    public function tambah_tugas($data)
+    {
+        $this->db->insert('user_tugas_tambahan', $data);
+    }
     public function tambah_kinerja($data)
     {
         $this->db->insert('kinerja', $data);
@@ -143,6 +147,12 @@ class User_model extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->update('kinerja_kegiatan', $data);
+
+    }
+    public function edit_tugas($data, $id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('user_tugas_tambahan', $data);
 
     }
     public function edit_user_sub_menu($data, $id)
@@ -200,6 +210,12 @@ class User_model extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->delete('kinerja_kegiatan');
+
+    }
+    public function delete_tugas($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('user_tugas_tambahan');
 
     }
     public function delete_kinerja($id)
@@ -355,4 +371,17 @@ class User_model extends CI_Model
 
         return $this->db->count_all_results();
     }
+
+    public function cek_kinerja($tanggal,$kode_guru)
+    {
+        
+        $query = $this->db->query("SELECT tanggal FROM kinerja WHERE kode_guru='$kode_guru' AND tanggal='$tanggal'"); // Ganti 'data' dengan nama tabel Anda
+
+        if ($query->num_rows() > 0) {
+            return TRUE; // Tanggal sudah ada
+        }
+        return FALSE; // Tanggal belum ada
+    }
+
+
 }
