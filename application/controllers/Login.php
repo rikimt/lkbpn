@@ -132,35 +132,27 @@ class Login extends CI_Controller
 
     }
 
-    private function _sendEmail()
+    public function send_email()
     {
-        $config = [
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'rikimuhama79@gmail.com',
-            'smtp_pass' => 'cibalong123',
-            'smtp_port' => 465,
-            'mailtype' => 'html',
-            'charset' => 'utf-8',
-            'newline' => "\r\n",
-        ];
 
-        $this->load->library('email', $config);
-        $this->email->initialize($config);
+       
 
-        $this->email->from('rikimuhama79@gmail.com', 'Warung');
-        $this->email->to('rikimuhamad357@gmail.com');
-        $this->email->subject('Testing');
-        $this->email->message('Helloo !!');
+        $this->email->initialize($config); // Inisialisasi konfigurasi email
 
+        // Set detail email
+        $this->email->set_newline("\r\n");
+        $this->email->from('riki@smkbpn.sch.id', 'SMK Bina Putera Nusantara'); // Ganti dengan email dan nama pengirim
+        $this->email->to('rikimhammad@gmail.com'); // Ganti dengan email penerima
+        $this->email->subject('Test Email via SendGrid');
+        $this->email->message('<h1>Hello!</h1><p>This is a test email sent using SendGrid with CodeIgniter 3.</p>');
+
+        // Kirim email
         if ($this->email->send()) {
-            return true;
+            echo 'Email berhasil dikirim!';
         } else {
-            echo $this->email->print_debugger();
-            die;
+            show_error($this->email->print_debugger()); // Tampilkan error jika gagal
         }
     }
-
     public function blocked()
     {
         $this->load->view('auth/blocked');
