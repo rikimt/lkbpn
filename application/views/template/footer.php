@@ -2,7 +2,7 @@
 <!-- footer -->
 <!-- ============================================================== -->
 <footer class="footer mt-3">
-  <strong>Copyright &copy; 2024 <a href="#">SMK BINA PUTERA NUSANTARA</a>
+  <strong>Copyright RMT&copy; 2024 <a href="#">SMK BINA PUTERA NUSANTARA</a>
 </footer>
 <!-- ============================================================== -->
 <!-- End footer -->
