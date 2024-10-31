@@ -82,7 +82,8 @@
     <table style="border:none;" class="tabel-data">
         <tr style="border:none;">
             <td style="text-align:center;border:none;">
-                <img src="<?= base_url('assets/images') ?>/logobpn2.png" alt="Logo" class="logo">
+
+                <img src="http://192.168.100.2:8080/lkbpn/assets/images/logobpn2.png" alt="Logo" class="logo">
             </td style="border:none;">
             <td style="text-align:center;border:none;">
                 <h3>LAPORAN KINERJA NON ASN</h3>
@@ -95,7 +96,7 @@
         </tr>
     </table>
     <div class="garis"></div>
-    <p><strong>Nama:</strong> <?= $user['nama']; ?>
+    <p style="font-size:10px;"><strong>Nama:</strong> <?= $user['nama']; ?>
         <br><strong>Jabatan:</strong> <?= $user['level']; ?>
         <br><strong>Tugas Tambahan:</strong> <?= $user['nama_tugas']; ?>
     </p>
@@ -136,8 +137,8 @@
                     <td width="30%" style="text-align: center;">
 
 
-                        <img src="<?= base_url('assets/images/bukti_kegiatan/') . $kinerja['bukti']; ?>" alt="bukti"
-                            style="width: 100%; height: auto;">
+                        <img src="http://192.168.100.2:8080/lkbpn/assets/images/bukti_kegiatan/<?= $kinerja['bukti']; ?>"
+                            alt="bukti" style="width: 100%; height: auto;">
 
                     </td>
                 </tr>
@@ -149,7 +150,7 @@
     <div></div>
     <div></div>
 
-    <table width="100%" style="margin-top:200px;font-size:8pt;">
+    <table width="100%" style="margin-top:200px; font-size: 10px;">
         <tr width="100%" style="">
             <td width="35%" style="text-align: center; border:none;">Mengetahui, <br> Kepala Sekolah</td>
             <td width="30%" style="border:none;"></td>

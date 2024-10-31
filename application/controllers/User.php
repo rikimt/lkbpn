@@ -652,8 +652,10 @@ class User extends CI_Controller
         // Load mPDF library
         $this->load->library('Mpdf_gen');
 
+
+
         // Set font default menjadi Times New Roman dengan ukuran 12
-        $this->mpdf_gen->mpdf->SetFont('times', '', 11);
+        $this->mpdf_gen->mpdf->SetFont('times', '', 10);
 
         // Atur ukuran kertas menjadi A4 dan margin sesuai dengan kebutuhan
         $this->mpdf_gen->mpdf->AddPage(
@@ -669,6 +671,8 @@ class User extends CI_Controller
             0,   // Margin header (0 untuk tidak ada header)
             0
         );  // Margin footer (0 untuk tidak ada footer)
+        // Set delay untuk pengambilan gambar
+        $mpdf = new \Mpdf\Mpdf(['image_dpi' => 300]);
 
         // Render view ke variabel HTML
         $html = $this->load->view('user/laporan_kinerja_pdf', $data, true);
