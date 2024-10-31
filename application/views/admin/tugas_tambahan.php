@@ -1,3 +1,42 @@
+<style>
+    /* CSS untuk tampilan desktop */
+    .card {
+        margin: 20px auto;
+        /* Mengatur margin card */
+        max-width: 800px;
+        /* Membatasi lebar maksimum card */
+    }
+
+    .table th,
+    .table td {
+        padding: 1rem;
+        /* Mengatur padding pada tabel */
+    }
+
+    /* CSS untuk tampilan layar kecil */
+    @media (max-width: 768px) {
+        .card {
+            width: 90%;
+            /* Memastikan card memenuhi lebar layar pada perangkat kecil */
+            margin: 10px auto;
+            /* Mengatur margin pada perangkat kecil */
+        }
+
+        .table th,
+        .table td {
+            padding: 0.5rem;
+            /* Memperkecil padding untuk tabel */
+            font-size: 0.85rem;
+            /* Memperkecil ukuran font untuk tabel */
+        }
+
+        .form-check-input {
+            transform: scale(1.2);
+            /* Memperbesar ukuran checkbox */
+        }
+    }
+</style>
+
 <!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->
@@ -18,7 +57,7 @@
                     <?= form_error('nama_tugas_tambahan', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
 
                 </div>
-                <table class="table table-border table-hover text-center">
+                <table class="table table-border table-hover text-center" id="myTable">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -139,7 +178,7 @@
                         <div class="input-group mb-3">
                             <input type="hidden" value="<?= $tugas['nama_tugas']; ?>" name="nama_tugas_tambahan">
                             <input type="hidden" value="<?= $tugas['id']; ?>" name="id">
-                            <p class="fw-bolder">Yakin hapus data tugas tambahan  <?= $tugas['nama_tugas']; ?>?</p>
+                            <p class="fw-bolder">Yakin hapus data tugas tambahan <?= $tugas['nama_tugas']; ?>?</p>
                         </div>
 
                     </div>

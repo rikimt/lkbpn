@@ -1,3 +1,38 @@
+<style>
+    /* CSS untuk tampilan desktop */
+    .thumbnail-image {
+        width: 50px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    /* CSS untuk tampilan layar kecil */
+    @media (max-width: 768px) {
+        .card {
+            margin: 0;
+            /* Menghilangkan margin pada card di perangkat kecil */
+            width: 100%;
+            /* Memastikan card memenuhi lebar layar */
+        }
+
+        .table th,
+        .table td {
+            padding: 0.5rem;
+            /* Memperkecil padding untuk tabel */
+            font-size: 0.85rem;
+            /* Memperkecil ukuran font untuk tabel */
+        }
+
+        .btn-sm {
+            font-size: 0.85rem;
+            /* Memperkecil ukuran tombol */
+            padding: 0.4rem 0.6rem;
+            /* Memperkecil padding tombol */
+        }
+    }
+</style>
+
 <!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->

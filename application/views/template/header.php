@@ -139,7 +139,7 @@
 
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?= base_url('login/logout') ?>"><i
-                    class="fa fa-power-off me-1 ms-1"></i> Keluar</a>
+                    class="fas fa-sign-out-alt me-1 ms-1"></i> Keluar</a>
 
               </ul>
             </li>
@@ -186,7 +186,10 @@
                 </li>
               <?php endforeach; ?>
             <?php endforeach; ?>
-
+            <li class="sidebar-item">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('login/logout') ?>"
+                aria-expanded="false"><i class="fas fa-sign-out-alt"></i><span class="hide-menu">Keluar</span></a>
+            </li>
 
           </ul>
         </nav>

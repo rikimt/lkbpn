@@ -1,148 +1,157 @@
+<style>
+    /* CSS untuk tampilan desktop */
+    .thumbnail-image {
+        width: 50px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    /* CSS untuk tampilan layar kecil */
+    @media (max-width: 768px) {
+        .card-title {
+            font-size: 1.15rem;
+        }
+
+        .btn-sm {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.6rem;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        /* Memperkecil gambar thumbnail */
+        .thumbnail-image {
+            width: 40px;
+        }
+    }
+</style>
+
 <!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->
 <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Sales Cards  -->
-    <!-- ============================================================== -->
     <div class="row">
         <div class="col-12">
-
-            <div class="card col-12">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title mb-0">Data Guru Aktif</h5>
                     <a class="btn btn-primary btn-sm text-white mt-2" data-bs-toggle="modal"
                         data-bs-target="#tambah-guru-modal">
-                        <i class=" fas fa-plus"><span class="ms-1">Tambah Guru</span></i>
+                        <i class="fas fa-plus"></i><span class="ms-1">Tambah Guru</span>
                     </a>
                     <?= $this->session->flashdata('message_sub_menu'); ?>
-                    <?= form_error('kode_guru', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-                    <?= form_error('nama', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-                    <?= form_error('email', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-                    <?= form_error('no_hp', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-                    <?= form_error('username', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-                    <?= form_error('password', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-                    <?= form_error('id_level', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-                    <?= form_error('id_tugas_tambahan', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-                    <?= form_error('foto', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-                    <?= form_error('status_aktif', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+                    <?php foreach (['kode_guru', 'nama', 'email', 'no_hp', 'username', 'password', 'id_level', 'id_tugas_tambahan', 'foto', 'status_aktif'] as $error_field): ?>
+                        <?= form_error($error_field, '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+                    <?php endforeach; ?>
                 </div>
-                <table class="table table-border table-hover text-center w-100 p-3">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Foto</th>
-                            <th scope="col">Kode Guru</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Jabatan</th>
-                            <th scope="col">Tugas Tambahan</th>
-                            <th scope="col">Tanggal Perubahan</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i = 1;
-                        foreach ($data_guru_aktif as $guru_aktif):
 
-                            ?>
+                <!-- Tabel Data Guru Aktif -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover text-center" id="myTable">
+                        <thead>
                             <tr>
-                                <th scope="row"><?= $i; ?></th>
-
-                                <td><img src="<?= base_url('assets/images/profil/') . $guru_aktif['foto']; ?>" alt=""
-                                        srcset="" width="50px">
-                                </td>
-
-                                <td><?= $guru_aktif['kode_guru']; ?></td>
-                                <td><?= $guru_aktif['nama']; ?></td>
-                                <td><?= $guru_aktif['email']; ?></td>
-                                <td><?= $guru_aktif['username']; ?></td>
-                                <td><?= $guru_aktif['level']; ?></td>
-                                <td><?= $guru_aktif['nama_tugas']; ?></td>
-                                <td><?= $guru_aktif['tanggal_dibuat']; ?></td>
-                                <td>
-                                    <?php if ($guru_aktif['level'] == 'Admin'): ?>
-                                        <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal"
-                                            data-bs-target="#edit-guru-modal<?= $guru_aktif['id']; ?>">
-                                            <i class="fas fa-edit"><span class="ms-1">Edit</span></i>
-                                        </a>
-                                        <a class="btn btn-danger btn-sm text-white disabled" data-bs-toggle="modal"
-                                            data-bs-target="#off-guru-modal<?= $guru_aktif['id']; ?>" aria-disabled="true">
-                                            <i class="fas fa-window-close"><span class="ms-1">Off</span></i>
-                                        </a>
-                                    <?php else: ?>
-                                        <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal"
-                                            data-bs-target="#edit-guru-modal<?= $guru_aktif['id']; ?>">
-                                            <i class="fas fa-edit"><span class="ms-1">Edit</span></i>
-                                        </a>
-                                        <a class="btn btn-danger btn-sm text-white" data-bs-toggle="modal"
-                                            data-bs-target="#off-guru-modal<?= $guru_aktif['id']; ?>">
-                                            <i class="fas fa-window-close"><span class="ms-1">Off</span></i>
-                                        </a>
-                                    <?php endif; ?>
-
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Kode Guru</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Jabatan</th>
+                                <th scope="col">Tugas Tambahan</th>
+                                <th scope="col">Tanggal Perubahan</th>
+                                <th scope="col">Aksi</th>
                             </tr>
-                            <?php $i++; endforeach; ?>
+                        </thead>
+                        <tbody>
+                            <?php $i = 1;
+                            foreach ($data_guru_aktif as $guru_aktif): ?>
+                                <tr>
+                                    <th scope="row"><?= $i++; ?></th>
+                                    <td><img src="<?= base_url('assets/images/profil/') . $guru_aktif['foto']; ?>"
+                                            alt="Foto Guru" class="thumbnail-image"></td>
+                                    <td><?= $guru_aktif['kode_guru']; ?></td>
+                                    <td><?= $guru_aktif['nama']; ?></td>
+                                    <td><?= $guru_aktif['email']; ?></td>
+                                    <td><?= $guru_aktif['username']; ?></td>
+                                    <td><?= $guru_aktif['level']; ?></td>
+                                    <td><?= $guru_aktif['nama_tugas']; ?></td>
+                                    <td><?= $guru_aktif['tanggal_dibuat']; ?></td>
+                                    <td>
+                                        <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal"
+                                            data-bs-target="#edit-guru-modal<?= $guru_aktif['id']; ?>">
+                                            <i class="fas fa-edit"></i><span class="ms-1">Edit</span>
+                                        </a>
+                                        <a class="btn btn-danger btn-sm text-white <?= $guru_aktif['level'] == 'Admin' ? 'disabled' : '' ?>"
+                                            data-bs-toggle="modal" data-bs-target="#off-guru-modal<?= $guru_aktif['id']; ?>"
+                                            <?= $guru_aktif['level'] == 'Admin' ? 'aria-disabled="true"' : '' ?>>
+                                            <i class="fas fa-window-close"></i><span class="ms-1">Off</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                    </tbody>
-                </table>
+            <!-- Tabel Data Guru Tidak Aktif -->
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title mb-0">Data Guru Tidak Aktif</h5>
                 </div>
-                <table class="table table-border table-hover text-center w-100 p-3">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Foto</th>
-                            <th scope="col">Kode Guru</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Jabatan</th>
-                            <th scope="col">Tugas Tambahan</th>
-                            <th scope="col">Tanggal Perubahan</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i = 1;
-                        foreach ($data_guru_tidak_aktif as $guru_tidak_aktif):
-
-                            ?>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover text-center" id="myTable2">
+                        <thead>
                             <tr>
-                                <th scope="row"><?= $i; ?></th>
-                                <td><img src="<?= base_url('assets/images/profil/') . $guru_tidak_aktif['foto']; ?>" alt=""
-                                        srcset="" class="w-25 ">
-                                </td>
-                                <td><?= $guru_tidak_aktif['kode_guru']; ?></td>
-                                <td><?= $guru_tidak_aktif['nama']; ?></td>
-                                <td><?= $guru_tidak_aktif['email']; ?></td>
-                                <td><?= $guru_tidak_aktif['username']; ?></td>
-                                <td><?= $guru_tidak_aktif['level']; ?></td>
-                                <td><?= $guru_tidak_aktif['nama_tugas']; ?></td>
-                                <td><?= $guru_tidak_aktif['tanggal_dibuat']; ?></td>
-                                <td>
-                                    <a class="btn btn-success btn-sm text-white">
-                                        <i class="fas fa-check-square"><span class="ms-1" data-bs-toggle="modal"
-                                                data-bs-target="#on-guru-modal<?= $guru_tidak_aktif['id']; ?>">On</span></i>
-                                    </a>
-                                    <a class="btn btn-danger btn-sm text-white" data-bs-toggle="modal"
-                                        data-bs-target="#delete-guru-modal<?= $guru_tidak_aktif['id']; ?>">
-                                        <i class="fas fa-trash"><span class="ms-1">Delete</span></i>
-                                    </a>
-
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Kode Guru</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Jabatan</th>
+                                <th scope="col">Tugas Tambahan</th>
+                                <th scope="col">Tanggal Perubahan</th>
+                                <th scope="col">Aksi</th>
                             </tr>
-                            <?php $i++; endforeach; ?>
-
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php $i = 1;
+                            foreach ($data_guru_tidak_aktif as $guru_tidak_aktif): ?>
+                                <tr>
+                                    <th scope="row"><?= $i++; ?></th>
+                                    <td><img src="<?= base_url('assets/images/profil/') . $guru_tidak_aktif['foto']; ?>"
+                                            alt="Foto Guru" class="thumbnail-image"></td>
+                                    <td><?= $guru_tidak_aktif['kode_guru']; ?></td>
+                                    <td><?= $guru_tidak_aktif['nama']; ?></td>
+                                    <td><?= $guru_tidak_aktif['email']; ?></td>
+                                    <td><?= $guru_tidak_aktif['username']; ?></td>
+                                    <td><?= $guru_tidak_aktif['level']; ?></td>
+                                    <td><?= $guru_tidak_aktif['nama_tugas']; ?></td>
+                                    <td><?= $guru_tidak_aktif['tanggal_dibuat']; ?></td>
+                                    <td>
+                                        <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal"
+                                            data-bs-target="#on-guru-modal<?= $guru_tidak_aktif['id']; ?>">
+                                            <i class="fas fa-check-square"></i><span class="ms-1">On</span>
+                                        </a>
+                                        <a class="btn btn-danger btn-sm text-white" data-bs-toggle="modal"
+                                            data-bs-target="#delete-guru-modal<?= $guru_tidak_aktif['id']; ?>">
+                                            <i class="fas fa-trash"></i><span class="ms-1">Delete</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
