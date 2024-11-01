@@ -104,9 +104,9 @@
 
 
     <br>
-    <table class="tabel-data">
+    <table class="tabel-data" style="font-size: 11px;">
         <thead>
-            <tr width="100%">
+            <tr width=" 100%">
                 <th width="5%" style="text-align: center;"><strong>No</strong></th>
                 <th width="25%" style="text-align: center;">
                     <strong>
