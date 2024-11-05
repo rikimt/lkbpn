@@ -23,6 +23,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Menu</th>
+                            <th scope="col">Icon</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -32,6 +33,7 @@
                             <tr>
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $menu['nama_menu']; ?></td>
+                                <td><?= $menu['menu_icon']; ?></td>
                                 <td>
                                     <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal"
                                         data-bs-target="#edit-menu-modal<?= $menu['id']; ?>">
@@ -82,6 +84,10 @@
                             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
                             name="nama_menu">
                     </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Icon" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name="icon">
+                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -109,6 +115,11 @@
                             <input type="text" class="form-control" placeholder="Nama Menu"
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
                                 name="nama_menu" value="<?= $menu['nama_menu']; ?>">
+                            <input type="hidden" name="id" value="<?= $menu['id']; ?>">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Icon" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default" name="icon" value="<?= $menu['menu_icon']; ?>">
                             <input type="hidden" name="id" value="<?= $menu['id']; ?>">
                         </div>
 

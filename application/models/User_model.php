@@ -238,7 +238,7 @@ class User_model extends CI_Model
 
     public function user_menu($id)
     {
-        return $this->db->query("SELECT user_menu.id, nama_menu FROM user_menu JOIN user_access_menu ON user_menu.id=user_access_menu.id_menu WHERE user_access_menu.id_level = '$id' AND user_menu.nama_menu != 'Home' ORDER BY user_access_menu.id_menu DESC");
+        return $this->db->query("SELECT user_menu.id, nama_menu, menu_icon FROM user_menu JOIN user_access_menu ON user_menu.id=user_access_menu.id_menu WHERE user_access_menu.id_level = '$id' AND user_menu.nama_menu != 'Home' ORDER BY user_access_menu.id_menu DESC");
     }
     public function user_sub_menu($id)
     {
@@ -372,9 +372,9 @@ class User_model extends CI_Model
         return $this->db->count_all_results();
     }
 
-    public function cek_kinerja($tanggal,$kode_guru)
+    public function cek_kinerja($tanggal, $kode_guru)
     {
-        
+
         $query = $this->db->query("SELECT tanggal FROM kinerja WHERE kode_guru='$kode_guru' AND tanggal='$tanggal'"); // Ganti 'data' dengan nama tabel Anda
 
         if ($query->num_rows() > 0) {

@@ -82,15 +82,29 @@
                                     <td><?= $guru_aktif['nama_tugas']; ?></td>
                                     <td><?= $guru_aktif['tanggal_dibuat']; ?></td>
                                     <td>
-                                        <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal"
-                                            data-bs-target="#edit-guru-modal<?= $guru_aktif['id']; ?>">
-                                            <i class="fas fa-edit"></i><span class="ms-1">Edit</span>
-                                        </a>
-                                        <a class="btn btn-danger btn-sm text-white <?= $guru_aktif['level'] == 'Admin' ? 'disabled' : '' ?>"
-                                            data-bs-toggle="modal" data-bs-target="#off-guru-modal<?= $guru_aktif['id']; ?>"
-                                            <?= $guru_aktif['level'] == 'Admin' ? 'aria-disabled="true"' : '' ?>>
-                                            <i class="fas fa-window-close"></i><span class="ms-1">Off</span>
-                                        </a>
+                                        <?php
+                                        $id_level_session = $this->session->userdata('username');
+                                        if ($id_level_session == "admin"): ?>
+                                            <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal"
+                                                data-bs-target="#edit-guru-modal<?= $guru_aktif['id']; ?>">
+                                                <i class="fas fa-edit"></i><span class="ms-1">Edit</span>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm text-white <?= $guru_aktif['level'] == 'Admin' ? 'disabled' : '' ?>"
+                                                data-bs-toggle="modal" data-bs-target="#off-guru-modal<?= $guru_aktif['id']; ?>"
+                                                <?= $guru_aktif['level'] == 'Admin' ? 'aria-disabled="true"' : '' ?>>
+                                                <i class="fas fa-window-close"></i><span class="ms-1">Off</span>
+                                            </a>
+                                        <?php else: ?>
+                                            <a class="btn btn-success btn-sm text-white <?= $guru_aktif['level'] == 'Admin' ? 'disabled' : '' ?>"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#edit-guru-modal<?= $guru_aktif['id']; ?>">
+                                                <i class="fas fa-edit"></i><span class="ms-1">Edit</span>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm text-white <?= $guru_aktif['level'] == 'Admin' ? 'disabled' : '' ?>"
+                                                data-bs-toggle="modal" data-bs-target="#off-guru-modal<?= $guru_aktif['id']; ?>"
+                                                <?= $guru_aktif['level'] == 'Admin' ? 'aria-disabled="true"' : '' ?>>
+                                                <i class="fas fa-window-close"></i><span class="ms-1">Off</span>
+                                            <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

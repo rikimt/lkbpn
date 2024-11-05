@@ -68,18 +68,58 @@
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $level['level']; ?></td>
                                 <td>
-                                    <a class="btn btn-warning btn-sm text-white" data-bs-toggle="modal"
-                                        href="<?= base_url('admin/akses_level/') . $level['id']; ?>">
-                                        <i class="fas fa-edit"><span class="ms-1">Akses</span></i>
-                                    </a>
-                                    <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal"
-                                        data-bs-target="#edit-level-modal<?= $level['id']; ?>">
-                                        <i class="fas fa-edit"><span class="ms-1">Edit</span></i>
-                                    </a>
-                                    <a class="btn btn-danger btn-sm text-white" data-bs-toggle="modal"
-                                        data-bs-target="#delete-level-modal<?= $level['id']; ?>">
-                                        <i class="fas fa-trash"><span class="ms-1">Delete</span></i>
-                                    </a>
+                                    <?php
+                                    $id_level_session = $this->session->userdata('username');
+                                    if ($id_level_session == "admin"): ?>
+                                        <a class="btn btn-warning btn-sm text-white" data-bs-toggle="modal"
+                                            href="<?= base_url('admin/akses_level/') . $level['id']; ?>">
+                                            <i class="fas fa-edit"><span class="ms-1">Akses</span></i>
+                                        </a>
+                                        <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal"
+                                            data-bs-target="#edit-level-modal<?= $level['id']; ?>">
+                                            <i class="fas fa-edit"><span class="ms-1">Edit</span></i>
+                                        </a>
+                                        <?php if ($level['level'] == "Admin"): ?>
+                                            <a class="btn btn-danger btn-sm text-white disabled" data-bs-toggle="modal"
+                                                data-bs-target="#delete-level-modal<?= $level['id']; ?>">
+                                                <i class="fas fa-trash"><span class="ms-1">Delete</span></i>
+                                            </a>
+                                        <?php else: ?>
+                                            <a class="btn btn-danger btn-sm text-white " data-bs-toggle="modal"
+                                                data-bs-target="#delete-level-modal<?= $level['id']; ?>">
+                                                <i class="fas fa-trash"><span class="ms-1">Delete</span></i>
+                                            </a>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <?php if ($level['level'] == "Admin"): ?>
+                                            <a class="btn btn-warning btn-sm text-white disabled" data-bs-toggle="modal"
+                                                href="<?= base_url('admin/akses_level/') . $level['id']; ?>">
+                                                <i class="fas fa-edit"><span class="ms-1">Akses</span></i>
+                                            </a>
+                                            <a class="btn btn-success btn-sm text-white disabled" data-bs-toggle="modal"
+                                                data-bs-target="#edit-level-modal<?= $level['id']; ?>">
+                                                <i class="fas fa-edit"><span class="ms-1">Edit</span></i>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm text-white disabled" data-bs-toggle="modal"
+                                                data-bs-target="#delete-level-modal<?= $level['id']; ?>">
+                                                <i class="fas fa-trash"><span class="ms-1">Delete</span></i>
+                                            </a>
+                                        <?php else: ?>
+                                            <a class="btn btn-warning btn-sm text-white " data-bs-toggle="modal"
+                                                href="<?= base_url('admin/akses_level/') . $level['id']; ?>">
+                                                <i class="fas fa-edit"><span class="ms-1">Akses</span></i>
+                                            </a>
+                                            <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal"
+                                                data-bs-target="#edit-level-modal<?= $level['id']; ?>">
+                                                <i class="fas fa-edit"><span class="ms-1">Edit</span></i>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm text-white" data-bs-toggle="modal"
+                                                data-bs-target="#delete-level-modal<?= $level['id']; ?>">
+                                                <i class="fas fa-trash"><span class="ms-1">Delete</span></i>
+                                            </a>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+
                                 </td>
                             </tr>
                             <?php $i++; endforeach; ?>

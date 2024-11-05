@@ -10,6 +10,7 @@ class User extends CI_Controller
         parent::__construct();
         $this->load->helper('url');
         $this->load->model('User_model');
+        $this->load->model('Staff_model');
         $this->load->library('upload'); // Memuat library upload
         cek_login();
     }
@@ -690,26 +691,46 @@ class User extends CI_Controller
         $username = $this->session->userdata('username');
         $data['judul'] = 'Kinerja';
         $id = $this->session->userdata('id_level');
-        $kd_guru = $this->session->userdata('kode_guru');
+        $kd_guru = $this->input->post('kode_guru');
+        $nama_user = $this->input->post('nama');
+        $id_kinerja = $this->input->post('id_kinerja');
         $data['menu'] = $this->User_model->user_menu($id)->result_array();
         $data['user'] = $this->User_model->get_user_login($username)->row_array();
-        $data['datakinerja'] = $this->User_model->get_all_kinerja_by_guru($kd_guru);
         $data['datakegiatan'] = $this->User_model->get_all_kegiatan();
+        $tanggal_sekarang = date("Y-m-d");
 
-        // Ambil tanggal dari data kinerja untuk mendapatkan bulan
-        if (!empty($data['datakinerja'])) {
-            // Ambil tanggal dari kinerja yang pertama
-            $firstKinerja = $data['datakinerja'][0]['tanggal'];
+        $bulan = $this->input->post("bulan");
+        $tahun = $this->input->post("tahun");
+        $tanggal_mulai = $this->input->post("tanggal_mulai");
+        $tanggal_selesai = $this->input->post("tanggal_selesai");
 
-            // Menggunakan fungsi helper untuk mendapatkan nama bulan
-            $bulan = nama_bulan_indo($firstKinerja); // Menggunakan fungsi helper
-            $data['bulan'] = $bulan; // Simpan nama bulan dalam data
+
+
+        if (!empty($bulan)) {
+            $data['datakinerja'] = $this->User_model->get_all_kinerja_by_guru_bulan($kd_guru, $bulan, $tahun);
+        } else if (!empty($tanggal_mulai)) {
+            $data['datakinerja'] = $this->User_model->get_all_kinerja_by_guru_tanggal($kd_guru, $tanggal_mulai, $tanggal_selesai);
         } else {
-            $data['bulan'] = 'Bulan Tidak Diketahui'; // Atur default jika tidak ada data
+            if (!empty($id_kinerja)) {
+                $data['datakinerja'] = $this->Staff_model->get_all_kinerja_by_guru_id($id_kinerja);
+
+            }
+            $data['bulan'] = 'Bulan Tidak Diketahui';
         }
 
 
-        $this->load->view('user/laporan_kinerja_pdf', $data);
+
+        // Ambil tanggal dari data kinerja untuk mendapatkan bulan
+        if (!empty($data['datakinerja'])) {
+            $firstKinerja = $data['datakinerja'][0]['tanggal'];
+            $bulan = nama_bulan_indo($firstKinerja);
+            $data['bulan'] = $bulan;
+        } else {
+            $data['bulan'] = 'Bulan Tidak Diketahui';
+        }
+
+
+        $this->load->view('staff/laporan_kinerja_pdf', $data);
 
     }
 

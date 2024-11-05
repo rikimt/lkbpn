@@ -166,25 +166,32 @@
               <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('home') ?>"
                 aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu">Home</span></a>
             </li>
+
             <?php foreach ($menu as $row): ?>
-              <div class="border-bottom border-dark  mb-1 mt-2">
-                <small class="text-dark fw-bold fs-6 font-monospace fst-italic  ms-2"><?= $row['nama_menu']; ?></small>
-              </div>
-              <?php
-              $this->load->model('User_model');
-              $id_menu = $row['id'];
+              <li class="sidebar-item">
+                <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                  aria-expanded="false"><i class="<?= $row['menu_icon']; ?>"></i><span
+                    class="hide-menu"><?= $row['nama_menu']; ?>
+                  </span></a>
+                <ul aria-expanded="false" class="collapse first-level">
+                  <?php
+                  $this->load->model('User_model');
+                  $id_menu = $row['id'];
 
 
-              $query_sub_menu = $this->db->query("SELECT * FROM user_sub_menu JOIN user_menu ON user_sub_menu.id_menu=user_menu.id WHERE user_sub_menu.id_menu = '$id_menu' AND is_active=1 ORDER BY user_sub_menu.no_urut")->result_array();
+                  $query_sub_menu = $this->db->query("SELECT * FROM user_sub_menu JOIN user_menu ON user_sub_menu.id_menu=user_menu.id WHERE user_sub_menu.id_menu = '$id_menu' AND is_active=1 ORDER BY user_sub_menu.no_urut")->result_array();
 
-              foreach ($query_sub_menu as $sub_menu):
-                ?>
-                <li class="sidebar-item">
-                  <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url($sub_menu['url']) ?>"
-                    aria-expanded="false"><i class="<?= $sub_menu['icon']; ?>"></i><span
-                      class="hide-menu"><?= $sub_menu['judul']; ?></span></a>
-                </li>
-              <?php endforeach; ?>
+                  foreach ($query_sub_menu as $sub_menu):
+                    ?>
+                    <li class="sidebar-item">
+                      <a href="<?= base_url($sub_menu['url']) ?>" class="sidebar-link"><i
+                          class="<?= $sub_menu['icon']; ?>"></i><span class="hide-menu"><?= $sub_menu['judul'];
+                            ?></span></a>
+                    </li>
+
+                  <?php endforeach; ?>
+                </ul>
+              </li>
             <?php endforeach; ?>
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('login/logout') ?>"
