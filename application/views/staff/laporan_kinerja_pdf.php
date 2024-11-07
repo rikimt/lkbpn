@@ -97,7 +97,7 @@
     </table>
     <div class="garis"></div>
     <p style="font-size:10px;"><strong>Nama:</strong> <?= $datakinerja[0]['nama']; ?>
-        <br><strong>Jabatan:</strong> <?= $datakinerja[0]['level']; ?>
+        <br><strong>Jabatan:</strong> <?= $datakinerja[0]['jabatan']; ?>
         <br><strong>Tugas Tambahan:</strong> <?= $datakinerja[0]['nama_tugas']; ?>
     </p>
 

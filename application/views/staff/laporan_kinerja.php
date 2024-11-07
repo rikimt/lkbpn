@@ -45,19 +45,11 @@
             <div class="card col-12">
                 <div class="card-body">
                     <h5 class="card-title mb-0">Nama : <?= $user['nama']; ?></h5>
-                    <h5 class="card-title mb-0">Jabatan : <?= $user['level']; ?></h5>
+                    <h5 class="card-title mb-0">Jabatan : <?= $user['jabatan']; ?></h5>
                     <h5 class="card-title mb-0">Tugas Tambahan : <?= $user['nama_tugas']; ?></h5>
 
                     <div class="row mt-2">
-                        <!-- Tombol Tambah Kegiatan -->
-                        <div class="col-auto mb-3">
-                            <a class="btn btn-primary btn-sm text-white">
-                                <i class="fas fa-plus">
-                                    <span class="ms-1" data-bs-toggle="modal"
-                                        data-bs-target="#tambah-level-modal">Tambah Kegiatan</span>
-                                </i>
-                            </a>
-                        </div>
+
 
                         <!-- Tombol Download Laporan -->
                         <div class="col-auto mb-3">

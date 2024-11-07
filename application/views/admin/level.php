@@ -44,10 +44,10 @@
         <div class="col-12">
             <div class="card col-6">
                 <div class="card-body">
-                    <h5 class="card-title mb-0">Data Jabatan</h5>
+                    <h5 class="card-title mb-0">Data Level</h5>
                     <a class="btn btn-primary btn-sm text-white mt-2">
                         <i class=" fas fa-plus"><span class="ms-1" data-bs-toggle="modal"
-                                data-bs-target="#tambah-level-modal">Tambah Jabatan</span></i>
+                                data-bs-target="#tambah-level-modal">Tambah Level</span></i>
                     </a>
                     <?= $this->session->flashdata('message_level'); ?>
                     <?= form_error('nama_level', '<div class="alert alert-danger" role="alert">', '</div>'); ?>

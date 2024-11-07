@@ -57,13 +57,16 @@
 
             <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
               <li><a href="#section-home" class="nav-link">Beranda</a></li>
-              <!-- <li class="has-children">
-                  <a href="#section-about" class="nav-link">About Us</a>
-                  <ul class="dropdown">
-                    <li><a href="#section-how-it-works" class="nav-link">How It Works</a></li>
-                    <li><a href="#section-our-team" class="nav-link">Our Team</a></li>
-                  </ul>
-                </li> -->
+              <li class="has-children">
+                <a href="#section-sistem" class="nav-link">Sistem</a>
+                <ul class="dropdown">
+                  <li><a href="http://192.168.100.2" class="nav-link" target="_blank">Sistem Informasi SMK BPN</a></li>
+                  <li><a href="<?= base_url('login') ?>" class="nav-link" target="_blank">Laporan Kinerja SMK BPN</a>
+                  </li>
+                  <li><a href="http://elearning.smkbpn.sch.id" class="nav-link" target="_blank">E-learning SMK BPN</a>
+                  </li>
+                </ul>
+              </li>
               <li><a href="#section-about" class="nav-link">Alamat</a></li>
               <li><a href="#section-prestasi" class="nav-link">Prestasi</a></li>
               <li><a href="#section-kegiatan" class="nav-link">Kegiatan</a></li>
@@ -105,7 +108,7 @@
   </div>
 
 
-  <div class="site-section border-bottom">
+  <div class="site-section border-bottom" id="section-sistem">
     <div class="container">
 
       <div class="row justify-content-center mb-5">

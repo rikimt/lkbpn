@@ -167,11 +167,21 @@
                 aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu">Home</span></a>
             </li>
 
-            <?php foreach ($menu as $row): ?>
+            <?php foreach ($menu as $row):
+              $nama_menu_db = $row['nama_menu'];
+
+              if ($nama_menu_db == "User") {
+                $nama_menu_display = "Guru";
+              } else if ($nama_menu_db == "Staff") {
+                $nama_menu_display = "Staff Tata Usaha";
+              } else {
+                $nama_menu_display = $nama_menu_db;
+              }
+              ?>
               <li class="sidebar-item">
                 <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
                   aria-expanded="false"><i class="<?= $row['menu_icon']; ?>"></i><span
-                    class="hide-menu"><?= $row['nama_menu']; ?>
+                    class="hide-menu"><?= $nama_menu_display ?>
                   </span></a>
                 <ul aria-expanded="false" class="collapse first-level">
                   <?php

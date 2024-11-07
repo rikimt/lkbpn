@@ -7,12 +7,7 @@ class User_model extends CI_Model
         return $sql->result_array();
 
     }
-    public function get_all_level()
-    {
-        $sql = $this->db->get('user_level');
-        return $sql->result_array();
 
-    }
     public function get_all_menu()
     {
         $sql = $this->db->get('user_menu');
@@ -57,9 +52,10 @@ class User_model extends CI_Model
     }
     public function get_user_login($username)
     {
-        $sql = $this->db->query("SELECT user.id AS guru_id, user.*, user_level.level, user_tugas_tambahan.nama_tugas 
+        $sql = $this->db->query("SELECT user.id AS guru_id, user.*, user_level.level, user_jabatan.jabatan, user_tugas_tambahan.nama_tugas 
                              FROM user 
                              JOIN user_level ON user.id_level = user_level.id 
+                             JOIN user_jabatan ON user.id_jabatan = user_jabatan.id 
                              JOIN user_tugas_tambahan ON user.id_tugas_tambahan = user_tugas_tambahan.id WHERE username='$username' limit 1 ");
         return $sql;
 
@@ -86,81 +82,20 @@ class User_model extends CI_Model
     {
         $this->db->insert('user', $data);
     }
-    public function tambah_guru($data)
-    {
-        $this->db->insert('user', $data);
-    }
-    public function tambah_user_level($data)
-    {
-        $this->db->insert('user_level', $data);
-    }
-    public function tambah_kegiatan($data)
-    {
-        $this->db->insert('kinerja_kegiatan', $data);
-    }
-    public function tambah_tugas($data)
-    {
-        $this->db->insert('user_tugas_tambahan', $data);
-    }
+
     public function tambah_kinerja($data)
     {
         $this->db->insert('kinerja', $data);
     }
-    public function tambah_user_menu($data)
-    {
-        $this->db->insert('user_menu', $data);
-    }
-    public function tambah_user_sub_menu($data)
-    {
-        $this->db->insert('user_sub_menu', $data);
-    }
-    public function tambah_akses($data)
-    {
-        $this->db->insert('user_access_menu', $data);
-    }
 
 
-    public function edit_guru($id, $data)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('user', $data);
-
-    }
-    public function edit_user_menu($data, $id)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('user_menu', $data);
-
-    }
-    public function edit_user_level($data, $id)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('user_level', $data);
-
-    }
     public function edit_kinerja($id, $data)
     {
         $this->db->where('id', $id); // Pastikan ID disini bukan array
         return $this->db->update('kinerja', $data); // Pastikan data berupa array valid
     }
-    public function edit_kegiatan($data, $id)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('kinerja_kegiatan', $data);
 
-    }
-    public function edit_tugas($data, $id)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('user_tugas_tambahan', $data);
 
-    }
-    public function edit_user_sub_menu($data, $id)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('user_sub_menu', $data);
-
-    }
     public function edit_profil($data, $id)
     {
         $this->db->where('id', $id);
@@ -174,66 +109,14 @@ class User_model extends CI_Model
 
     }
 
-    public function off_user_sub_menu($data, $id)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('user_sub_menu', $data);
 
-    }
-    public function off_guru($data, $id)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('user', $data);
-
-    }
-
-
-    public function delete_user_menu($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete('user_menu');
-
-    }
-    public function delete_guru($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete('user');
-
-    }
-    public function delete_user_level($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete('user_level');
-
-    }
-    public function delete_kegiatan($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete('kinerja_kegiatan');
-
-    }
-    public function delete_tugas($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete('user_tugas_tambahan');
-
-    }
     public function delete_kinerja($id)
     {
         $this->db->where('id', $id);
         $this->db->delete('kinerja');
 
     }
-    public function delete_user_sub_menu($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete('user_sub_menu');
 
-    }
-    public function delete_akses($data)
-    {
-        $this->db->delete('user_access_menu', $data);
-    }
 
 
     public function user_menu($id)
@@ -251,27 +134,7 @@ class User_model extends CI_Model
     }
 
 
-    public function get_all_guru_aktif()
-    {
-        $sql = $this->db->query("SELECT user.id AS guru_id, user.*, user_level.level, user_tugas_tambahan.nama_tugas 
-                             FROM user 
-                             JOIN user_level ON user.id_level = user_level.id 
-                             JOIN user_tugas_tambahan ON user.id_tugas_tambahan = user_tugas_tambahan.id 
-                             WHERE user.status_aktif = 1 ORDER BY nama");
-        return $sql->result_array();
 
-    }
-
-    public function get_all_guru_tidak_aktif()
-    {
-        $sql = $this->db->query("SELECT user.id AS guru_id, user.*, user_level.level, user_tugas_tambahan.nama_tugas 
-                             FROM user 
-                             JOIN user_level ON user.id_level = user_level.id 
-                             JOIN user_tugas_tambahan ON user.id_tugas_tambahan = user_tugas_tambahan.id 
-                             WHERE user.status_aktif = 0 ORDER BY nama");
-        return $sql->result_array();
-
-    }
 
     public function get_all_kegiatan()
     {
@@ -279,9 +142,21 @@ class User_model extends CI_Model
         return $sql->result_array();
 
     }
+    public function get_all_level()
+    {
+        $sql = $this->db->query("SELECT * FROM user_level ORDER BY CASE WHEN level = 'user' THEN 0 ELSE 1 END, level ASC;");
+        return $sql->result_array();
+
+    }
+    public function get_all_level_noadmin()
+    {
+        $sql = $this->db->query("SELECT * FROM user_level WHERE id!=1 ORDER BY CASE WHEN level = 'user' THEN 0 ELSE 1 END, level ASC;");
+        return $sql->result_array();
+
+    }
     public function get_all_jabatan()
     {
-        $sql = $this->db->query("SELECT * FROM user_level ORDER BY CASE WHEN level = 'Guru' THEN 0 ELSE 1 END, level ASC;");
+        $sql = $this->db->query("SELECT * FROM user_jabatan ORDER BY CASE WHEN jabatan = 'Guru' THEN 0 ELSE 1 END, jabatan ASC;");
         return $sql->result_array();
 
     }

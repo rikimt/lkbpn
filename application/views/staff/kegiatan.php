@@ -114,7 +114,7 @@
                 <h1 class="modal-title fs-5" id="tambah-level-modal-label">Tambah Kegiatan</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="<?= base_url('admin/kegiatan'); ?>" method="post">
+            <form action="<?= base_url('staff/kegiatan'); ?>" method="post">
                 <div class="modal-body">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Nama Kegiatan"
@@ -142,7 +142,7 @@
                     <h1 class="modal-title fs-5" id="tambah-level-modal-label">Edit Kegiatan</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="<?= base_url('admin/kegiatan'); ?>" method="post">
+                <form action="<?= base_url('staff/kegiatan'); ?>" method="post">
                     <div class="modal-body">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Nama Kegiatan"
@@ -172,7 +172,7 @@
                     <h1 class="modal-title fs-5" id="tambah-level-modal-label">Hapus Kegiatan</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="<?= base_url('admin/kegiatan'); ?>" method="post">
+                <form action="<?= base_url('staff/kegiatan'); ?>" method="post">
                     <div class="modal-body">
                         <div class="input-group mb-3">
                             <input type="hidden" value="<?= $kegiatan['nama_kegiatan']; ?>" name="nama_kegiatan">
