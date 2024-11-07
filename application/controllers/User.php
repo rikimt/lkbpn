@@ -378,7 +378,7 @@ class User extends CI_Controller
         // Persiapan data yang akan disimpan ke dalam database
         $data = [
             'kode_guru' => $kd_guru,
-            'id_jabatan' => $data_user['id_level'], // Contoh ID jabatan
+            'id_jabatan' => $data_user['id_jabatan'], // Contoh ID jabatan
             'id_tugas_tambahan' => $data_user['id_tugas_tambahan'], // Contoh ID tugas tambahan
             'uraian' => $uraian, // Kegiatan yang sudah digabungkan
             'tanggal' => $tanggal,
@@ -552,6 +552,21 @@ class User extends CI_Controller
         redirect('user/kinerja');
     }
 
+    public function print_pdf()
+    {
+        $username = $this->session->userdata('username');
+        $kode_guru = $this->session->userdata('kode_guru');
+        $id = $this->session->userdata('id_level');
+        $data['menu'] = $this->User_model->user_menu($id)->result_array();
+        $data['judul'] = 'Download Laporan';
+        $data['user'] = $this->User_model->get_user_login($username)->row_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('user/print_pdf', $data);
+        $this->load->view('template/footer');
+
+    }
+
 
     public function download_kinerja_pdf()
     {
@@ -683,6 +698,9 @@ class User extends CI_Controller
 
         // Outputkan PDF (langsung download)
         $this->mpdf_gen->mpdf->Output('laporan_kinerja-' . $nama_user . "-" . $tanggal_sekarang . ".pdf", 'D');
+
+
+
     }
 
     public function testing()

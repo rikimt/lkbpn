@@ -124,18 +124,19 @@
                     waves-effect waves-dark
                     pro-pic
                   " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
+                <?php echo $user['nama'];
+                ?>
                 <?php $foto = $user['foto'];
                 ?>
+
                 <img src="<?= base_url('assets/images/profil/' . $foto) ?>" alt="user" class="rounded-circle"
                   width="31" />
 
               </a>
               <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
+
                 <a class="dropdown-item" href="<?= base_url('user/profil') ?>"><i
-                    class="mdi mdi-account-settings-variant me-1 ms-1"></i>
-                  My
-                  Profile</a>
+                    class="mdi mdi-account-settings-variant me-1 ms-1"></i>Profile</a>
 
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?= base_url('login/logout') ?>"><i

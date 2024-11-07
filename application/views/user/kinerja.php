@@ -45,7 +45,7 @@
             <div class="card col-12">
                 <div class="card-body">
                     <h5 class="card-title mb-0">Nama : <?= $user['nama']; ?></h5>
-                    <h5 class="card-title mb-0">Jabatan : <?= $user['level']; ?></h5>
+                    <h5 class="card-title mb-0">Jabatan : <?= $user['jabatan']; ?></h5>
                     <h5 class="card-title mb-0">Tugas Tambahan : <?= $user['nama_tugas']; ?></h5>
 
                     <div class="row mt-2">
@@ -61,26 +61,11 @@
 
                         <!-- Tombol Download Laporan -->
                         <div class="col-auto mb-3">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-success btn-sm dropdown-toggle text-white"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-print"></i> Download Laporan
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="ms-1" data-bs-toggle="modal"
-                                                data-bs-target="#print-bulan">Perbulan</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="ms-1" data-bs-toggle="modal"
-                                                data-bs-target="#print-tanggal">Pertanggal</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+
+                            <a href="<?= base_url('user/print_pdf'); ?>" class="btn btn-success btn-sm  text-white">
+                                <i class="fas fa-print"></i> Download Laporan
+                            </a>
+
                         </div>
 
                         <!-- Form Pencarian -->
@@ -514,7 +499,7 @@
             <select class="form-select kegiatan-select" name="kegiatan[]"  onchange="handleKegiatanSelectChange(this)">
                 <option selected>Pilih Kegiatan</option>
                 <?php foreach ($datakegiatan as $kegiatan): ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option value="<?= $kegiatan['nama_kegiatan']; ?>"><?= $kegiatan['nama_kegiatan']; ?></option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <option value="<?= $kegiatan['nama_kegiatan']; ?>"><?= $kegiatan['nama_kegiatan']; ?></option>
                 <?php endforeach; ?>
                 <option value="lainnya">Lainnya...</option>
             </select>
@@ -542,7 +527,7 @@
                 <select class="form-select kegiatan-select" name="kegiatan[]" required onchange="handleKegiatanSelectChange(this)">
                     <option value="">Pilih Kegiatan</option>
                     <?php foreach ($datakegiatan as $kegiatan): ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <option value="<?= $kegiatan['nama_kegiatan']; ?>"><?= $kegiatan['nama_kegiatan']; ?></option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option value="<?= $kegiatan['nama_kegiatan']; ?>"><?= $kegiatan['nama_kegiatan']; ?></option>
                     <?php endforeach; ?>
                     <option value="lainnya">Lainnya...</option>
                 </select>

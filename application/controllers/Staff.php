@@ -518,6 +518,26 @@ class Staff extends CI_Controller
     // -------------------download PDF--------------------------------------------------
     // ---------------------------------------------------------------------------------
 
+    public function print_pdf()
+    {
+        $username = $this->session->userdata('username');
+        $data['judul'] = 'Download Laporan';
+        $id = $this->session->userdata('id_level');
+        $kd_guru = $this->session->userdata('kode_guru');
+        $data['menu'] = $this->User_model->user_menu($id)->result_array();
+        $data['user'] = $this->User_model->get_user_login($username)->row_array();
+        $data['datakegiatan'] = $this->User_model->get_all_kegiatan();
+        $data['datakinerja'] = $this->Staff_model->get_all_kinerja();
+        $data['dataguru'] = $this->Staff_model->get_guru_by_kinerja();
+        $tanggal_input = hari_indo($this->input->post("tanggal_input"));
+        $tanggal = $this->input->post("tanggal_input");
+
+        $this->load->view('template/header', $data);
+        $this->load->view('staff/print_pdf', $data);
+        $this->load->view('template/footer');
+
+    }
+
     public function laporan_kinerja()
     {
         $username = $this->session->userdata('username');

@@ -97,7 +97,7 @@
     </table>
     <div class="garis"></div>
     <p style="font-size:10px;"><strong>Nama:</strong> <?= $user['nama']; ?>
-        <br><strong>Jabatan:</strong> <?= $user['level']; ?>
+        <br><strong>Jabatan:</strong> <?= $user['jabatan']; ?>
         <br><strong>Tugas Tambahan:</strong> <?= $user['nama_tugas']; ?>
     </p>
 
