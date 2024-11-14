@@ -86,6 +86,13 @@ jQuery(document).ready(function($) {
 				}
 	    }
 		});
+
+		$('.site-mobile-menu a').on('click', function(e) {
+			// Jika tautan hanya digunakan untuk interaksi tanpa navigasi
+			if ($(this).attr('href') === '#') {
+				e.preventDefault();
+			}
+		});
 	}; 
 	siteMenuClone();
 

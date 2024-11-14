@@ -107,9 +107,13 @@
                                             <input type="hidden" name="nama" value="<?= $kinerja['nama']; ?>">
                                             <input type="hidden" name="id_kinerja" value="<?= $kinerja['id']; ?>">
 
-                                            <button type="submit" class="btn btn-primary" name="submit_laporan">
+                                            <button type="submit" class="btn-sm btn-primary" name="submit_laporan">
                                                 <i class="fas fa-print"><span class="ms-1">Download</span></i>
                                             </button>
+                                            <a class="btn btn-danger btn-sm text-white" data-bs-toggle="modal"
+                                                data-bs-target="#delete-level-modal<?= $kinerja['id']; ?>">
+                                                <i class="fas fa-trash"><span class="ms-1">Hapus</span></i>
+                                            </a>
                                         </form>
                                     </td>
                                 </tr>

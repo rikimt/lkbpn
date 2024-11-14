@@ -28,80 +28,108 @@
 
   <link rel="stylesheet" href="<?= base_url('assets/landing/') ?>css/style.css">
 
+  <style>
+    .navbar {
+      background-color: #f8f9fa;
+      /* Ubah warna ini sesuai kebutuhan */
+    }
+
+    .navbar .nav-link {
+      color: #212529;
+      /* Ubah warna teks sesuai kebutuhan */
+    }
+
+    .navbar .nav-link:hover {
+      color: #f16821;
+      /* Warna saat hover, sesuaikan dengan tema Anda */
+    }
+
+
+    .transparent-navbar {
+      background-color: rgba(255, 255, 255, 0.7);
+      /* Transparansi yang bisa disesuaikan */
+      z-index: 1000;
+      /* Pastikan navbar selalu berada di atas */
+      margin-bottom: 0;
+    }
+
+    .transparent-navbar .nav-link {
+      color: #212529;
+      /* Warna teks menu */
+    }
+
+    .transparent-navbar .nav-link:hover {
+      color: #f16821;
+      /* Warna teks saat hover */
+    }
+
+    .site-blocks-cover {
+      position: relative;
+      margin-top: -75px;
+      /* Sesuaikan nilai ini dengan tinggi navbar Anda */
+      padding-top: 0;
+      /* Menghindari konten terpotong oleh navbar */
+
+    }
+  </style>
+
 </head>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="200">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="0">
 
   <!-- <div class="site-wrap"> -->
 
-  <div class="site-mobile-menu site-navbar-target">
-    <div class="site-mobile-menu-header">
-      <div class="site-mobile-menu-close mt-3">
-        <span class="icon-close2 js-menu-toggle"></span>
-      </div>
-    </div>
-    <div class="site-mobile-menu-body"></div>
-  </div>
 
-  <header class="site-navbar py-3 js-site-navbar site-navbar-target" role="banner" id="site-navbar">
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top transparent-navbar">
+    <a href="#" class="text-white h2 mb-0 navbar-brand">
+      <img src="<?= base_url('assets/landing/') ?>images/logobpn.png" alt="Image" width="50px">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div class="container">
-      <div class="row align-items-center">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li><a href="#section-home" class="nav-link">Beranda</a></li>
 
-        <div class="col-11 col-xl-2 site-logo">
-          <h1 class="mb-0"><a href="#" class="text-white h2 mb-0"><img
-                src="<?= base_url('assets/landing/') ?>images/logobpn.png" alt="Image" width="50px"></a></h1>
-        </div>
-        <div class="col-12 col-md-10 d-none d-xl-block">
-          <nav class="site-navigation position-relative text-right" role="navigation">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Sistem
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a href="http://192.168.100.2" class="nav-link" target="_blank">Sistem Informasi SMK BPN</a>
 
-            <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
-              <li><a href="#section-home" class="nav-link">Beranda</a></li>
-              <li class="has-children">
-                <a href="#section-sistem" class="nav-link">Sistem</a>
-                <ul class="dropdown">
-                  <li><a href="http://192.168.100.2" class="nav-link" target="_blank">Sistem Informasi SMK BPN</a></li>
-                  <li><a href="<?= base_url('login') ?>" class="nav-link" target="_blank">Laporan Kinerja SMK BPN</a>
-                  </li>
-                  <li><a href="http://elearning.smkbpn.sch.id" class="nav-link" target="_blank">E-learning SMK BPN</a>
-                  </li>
-                </ul>
-              </li>
-              <li><a href="#section-about" class="nav-link">Alamat</a></li>
-              <li><a href="#section-prestasi" class="nav-link">Prestasi</a></li>
-              <li><a href="#section-kegiatan" class="nav-link">Kegiatan</a></li>
-              <li><a href="#section-berita" class="nav-link">Berita</a></li>
-              <li><a href="#section-kontak" class="nav-link">Kontak</a></li>
-            </ul>
-          </nav>
-        </div>
+            <a href="<?= base_url('login') ?>" class="nav-link" target="_blank">Laporan Kinerja SMK BPN</a>
 
+            <a href="http://elearning.smkbpn.sch.id" class="nav-link" target="_blank">E-learning SMK BPN</a>
 
-        <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#"
-            class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
-
-      </div>
+          </div>
+        </li>
+        <li><a href="#section-about" class="nav-link">Alamat</a></li>
+        <li><a href="#section-prestasi" class="nav-link">Prestasi</a></li>
+        <li><a href="#section-kegiatan" class="nav-link">Kegiatan</a></li>
+        <li><a href="#section-berita" class="nav-link">Berita</a></li>
+        <li><a href="#section-kontak" class="nav-link">Kontak</a></li>
+      </ul>
 
     </div>
-    </div>
-
-  </header>
+  </nav>
 
 
 
-  <div class="site-blocks-cover overlay"
+
+
+  <div class="site-blocks-cover overlay top"
     style="background-image: url(<?= base_url('assets/landing/') ?>images/smkbpn.jpg);" data-aos="fade"
     data-stellar-background-ratio="0.5" id="section-home">
     <div class="container">
       <div class="row align-items-center justify-content-center text-center">
-
         <div class="col-md-12" data-aos="fade-up" data-aos-delay="400">
-
-
           <h1 class="text-white font-weight-light text-uppercase font-weight-bold" data-aos="fade-up">SMK BINA PUTERA
             NUSANTARA</h1>
           <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Tasikmalaya</p>
-
         </div>
       </div>
     </div>
