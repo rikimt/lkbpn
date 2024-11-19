@@ -13,8 +13,11 @@
                 </div>
 
                 <div class="row justify-content-center">
-                    <img src="<?= base_url('assets/images/profil/') . $user['foto']; ?>" alt=""
-                        class="img-fluid rounded-circle w-50">
+                    <div class="overflow-hidden"
+                        style="width: 150px; height: 150px; border-radius: 50%; border: 2px solid #ccc;">
+                        <img src="<?= base_url('assets/images/profil/') . $user['foto']; ?>" alt="" class="img-fluid"
+                            style="object-fit: cover; width: 170px; height: 170px;">
+                    </div>
                 </div>
 
                 <div class="row justify-content-center mt-3">

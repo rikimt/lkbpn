@@ -82,9 +82,13 @@ class User extends CI_Controller
                 $file_extension = pathinfo($uploaded_file_name, PATHINFO_EXTENSION);
                 $new_file_name = $kd_guru . "_" . date('Y-m-d', strtotime($tanggal)) . '_' . uniqid() . '.' . $file_extension;
 
-                // Compress image
+                // Compress and orientate image
                 $manager = new ImageManager(['driver' => 'gd']);
                 $img = $manager->make('./assets/images/profil/' . $uploaded_file_name);
+
+                // Menyesuaikan orientasi gambar
+                $img->orientate();
+
                 $compression_quality = 75;
                 do {
                     $img->save('./assets/images/profil/' . $new_file_name, $compression_quality);
@@ -359,8 +363,11 @@ class User extends CI_Controller
                 // Inisialisasi ImageManager
                 $manager = new ImageManager(['driver' => 'gd']); // Menggunakan GD sebagai driver
 
-                // Menggunakan Intervention Image untuk kompresi
+                // Menggunakan Intervention Image untuk kompresi dan orientasi
                 $img = $manager->make('./assets/images/bukti_kegiatan/' . $uploaded_file_name);
+
+                // Menyesuaikan orientasi gambar
+                $img->orientate();
 
                 // Kompresi hingga 500 KB
                 $compression_quality = 75; // Awal kualitas kompresi
@@ -374,6 +381,8 @@ class User extends CI_Controller
                 unlink('./assets/images/bukti_kegiatan/' . $uploaded_file_name);
             }
         }
+
+
 
         // Persiapan data yang akan disimpan ke dalam database
         $data = [
@@ -488,8 +497,11 @@ class User extends CI_Controller
                 // Inisialisasi ImageManager untuk kompresi
                 $manager = new ImageManager(['driver' => 'gd']); // Menggunakan GD sebagai driver
 
-                // Menggunakan Intervention Image untuk kompresi
+                // Menggunakan Intervention Image untuk kompresi dan orientasi
                 $img = $manager->make($config['upload_path'] . $uploaded_file_name);
+
+                // Menyesuaikan orientasi gambar
+                $img->orientate();
 
                 // Kompresi hingga 500 KB
                 $compression_quality = 75; // Awal kualitas kompresi
@@ -512,6 +524,7 @@ class User extends CI_Controller
             // Jika tidak ada file diunggah, gunakan file lama
             $new_file_name = $this->User_model->get_by_id($id_kinerja)['bukti'];
         }
+
 
         // Simpan perubahan ke database
         $data = [

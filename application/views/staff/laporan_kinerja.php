@@ -98,8 +98,9 @@
                                         </ol>
                                     </td>
                                     <td class="text-center">
+
                                         <img src="<?= base_url('assets/images/bukti_kegiatan/') . $kinerja['bukti']; ?>"
-                                            alt="notFound" width="250px">
+                                            alt="notFound" style="width:250px; max-height: 250px; object-fit: cover;">
                                     </td>
                                     <td>
                                         <form action="<?= base_url('staff/download_kinerja_pdf_guru'); ?>" method="post">
@@ -240,3 +241,36 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal hapus level -->
+<?php foreach ($datakinerja as $kinerja): ?>
+    <div class="modal fade" id="delete-level-modal<?= $kinerja['id']; ?>" tabindex="-1"
+        aria-labelledby="tambah-level-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="tambah-level-modal-label">Hapus Kinerja</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="<?= base_url('staff/delete_kinerja'); ?>" method="post">
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <input type="hidden" value="<?= $kinerja['tanggal']; ?>" name="tanggal_input">
+                            <input type="hidden" value="<?= $kinerja['nama']; ?>" name="nama">
+                            <input type="hidden" value="<?= $kinerja['id']; ?>" name="id">
+                            <p class="fw-bolder">Yakin hapus data kegiatan atas nama <?= $kinerja['nama']; ?> pada hari
+                                <?= hari_indo($kinerja['tanggal']); ?>?
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger" name="delete_kinerja">Hapus</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>

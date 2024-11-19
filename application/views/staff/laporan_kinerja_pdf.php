@@ -121,9 +121,10 @@
             <?php $i = 1; ?>
             <?php foreach ($datakinerja as $kinerja): ?>
                 <tr width="100%">
-                    <td width="5%" style="text-align: center;"><?= $i++; ?></td>
-                    <td width="25%"><?= hari_indo($kinerja['tanggal']); ?></td>
-                    <td width="40%">
+                    <td width="5%" style="text-align: center; vertical-align: top;"><?= $i++; ?></td>
+                    <td width="25%" style="text-align: left; vertical-align: top;"><?= hari_indo($kinerja['tanggal']); ?>
+                    </td>
+                    <td width="40%" style="text-align: left; vertical-align: top;">
                         <ol>
                             <?php
                             // Pisahkan uraian berdasarkan koma
@@ -134,11 +135,11 @@
                             ?>
                         </ol>
                     </td>
-                    <td width="30%" style="text-align: center;">
+                    <td width="30%" style="text-align: center; ">
 
 
                         <img src="http://192.168.100.2:8080/lkbpn/assets/images/bukti_kegiatan/<?= $kinerja['bukti']; ?>"
-                            alt="bukti" style="width: 100%; height: auto;">
+                            alt="bukti" style="width:100%; max-height: 150px; object-fit: cover;">
 
                     </td>
                 </tr>

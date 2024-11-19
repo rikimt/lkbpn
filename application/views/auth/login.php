@@ -53,7 +53,8 @@
         <div class="auth-box bg-dark border-top border-secondary">
           <div>
             <div class="text-center pt-3 pb-3">
-              <span class="db"><img src="<?= base_url('assets/') ?>images/logosmk.png" alt="logo" width="270px" /></span>
+              <span class="db"><img src="<?= base_url('assets/') ?>images/logosmk.png" alt="logo"
+                  width="270px" /></span>
             </div>
 
             <!-- Form -->
@@ -78,54 +79,65 @@
                   </div>
                   <?= form_error('password', '<small class="text-danger">', '</small>');
                   ; ?>
-                  <div class="input-group mb-3">
+                  <div class="input-group mb-3 position-relative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text bg-warning text-white h-100" id="basic-addon2"><i
-                          class="mdi mdi-lock fs-4"></i></span>
+                      <span class="input-group-text bg-warning text-white h-100" id="basic-addon2">
+                        <i class="mdi mdi-lock fs-4"></i>
+                      </span>
                     </div>
-                    <div class="form-floating">
-                      <input type="password" class="form-control form-control-lg" placeholder="Password" name="password"
-                        aria-label="Password" aria-describedby="basic-addon1" id="floatingPassword" />
+                    <div class="form-floating" style="flex: 1;">
+                      <input type="password" class="form-control form-control-lg pr-5" placeholder="Password"
+                        name="password" aria-label="Password" aria-describedby="basic-addon1" id="floatingPassword" />
                       <label for="floatingPassword">Password</label>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="row border-top border-secondary">
-                <div class="col-12">
-                  <div class="form-group">
-                    <div class="pt-3 d-grid">
-                      <button class="btn btn-block btn-lg btn-info" type="submit">
-                        Masuk
+                      <button type="button"
+                        class="btn btn-sm btn-outline-secondary position-absolute end-0 top-50 translate-middle-y"
+                        id="togglePassword" style="right: 10px; border:none;">
+                        <i class="mdi mdi-eye"></i>
                       </button>
                     </div>
                   </div>
+
+
+
+
+                </div>
+
+              </div>
+          </div>
+          <div class="row border-top border-secondary">
+            <div class="col-12">
+              <div class="form-group">
+                <div class="pt-3 d-grid">
+                  <button class="btn btn-block btn-lg btn-info" type="submit">
+                    Masuk
+                  </button>
                 </div>
               </div>
-              <div class="row border-top border-secondary">
-                <!-- <a class="link-success" href="">Belum Punya Akun?</a>  -->
-              </div>
-            </form>
+            </div>
           </div>
+          <div class="row border-top border-secondary">
+            <!-- <a class="link-success" href="">Belum Punya Akun?</a>  -->
+          </div>
+          </form>
         </div>
       </div>
-      <!-- ============================================================== -->
-      <!-- Login box.scss -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Page wrapper scss in scafholding.scss -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Page wrapper scss in scafholding.scss -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Right Sidebar -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Right Sidebar -->
-      <!-- ============================================================== -->
     </div>
+    <!-- ============================================================== -->
+    <!-- Login box.scss -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper scss in scafholding.scss -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper scss in scafholding.scss -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right Sidebar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right Sidebar -->
+    <!-- ============================================================== -->
+  </div>
   </div>
   <!-- ============================================================== -->
   <!-- All Required js -->
@@ -139,6 +151,23 @@
   <script>
     $(".preloader").fadeOut();
   </script>
+
+  <script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+      const passwordInput = document.getElementById('floatingPassword');
+      const icon = this.querySelector('i');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('mdi-eye');
+        icon.classList.add('mdi-eye-off');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('mdi-eye-off');
+        icon.classList.add('mdi-eye');
+      }
+    });
+  </script>
 </body>
+
 
 </html>

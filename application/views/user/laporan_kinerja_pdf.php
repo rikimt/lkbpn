@@ -138,7 +138,7 @@
 
 
                         <img src="http://192.168.100.2:8080/lkbpn/assets/images/bukti_kegiatan/<?= $kinerja['bukti']; ?>"
-                            alt="bukti" style="width: 100%; height: auto;">
+                            alt="bukti" style="width:100%; max-height: 150px; object-fit: cover;">
 
                     </td>
                 </tr>

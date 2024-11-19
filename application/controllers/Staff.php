@@ -518,6 +518,31 @@ class Staff extends CI_Controller
     // -------------------download PDF--------------------------------------------------
     // ---------------------------------------------------------------------------------
 
+    public function delete_kinerja()
+    {
+        $tanggal = htmlspecialchars($this->input->post('tanggal_input'));
+        $nama = htmlspecialchars($this->input->post('nama'));
+        $id = htmlspecialchars($this->input->post('id'));
+
+        // Ambil nama file dari database berdasarkan ID kinerja
+        $kinerja = $this->User_model->get_by_id($id);
+        $file_to_delete = $kinerja['bukti']; // Ambil nama file bukti dari entri
+
+        // Hapus data dari database
+        $this->User_model->delete_kinerja($id);
+
+        // Hapus file dari server jika ada
+        if (!empty($file_to_delete) && file_exists('./assets/images/bukti_kegiatan/' . $file_to_delete)) {
+            unlink('./assets/images/bukti_kegiatan/' . $file_to_delete);
+        }
+
+        // Set pesan sukses dan redirect
+        $this->session->set_flashdata('message_level', '<div class="alert alert-success" role="alert">Data atas nama ' . $nama . ' pada hari ' .
+            hari_indo($tanggal) .
+            ' telah dihapus</div>');
+        redirect('staff/laporan_kinerja');
+    }
+
     public function print_pdf()
     {
         $username = $this->session->userdata('username');

@@ -130,7 +130,7 @@
                 ?>
 
                 <img src="<?= base_url('assets/images/profil/' . $foto) ?>" alt="user" class="rounded-circle"
-                  width="31" />
+                  style="width: 35px; height: 35px; object-fit: cover;">
 
               </a>
               <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
